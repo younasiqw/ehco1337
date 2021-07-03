@@ -333,6 +333,7 @@ ConfPy() {
 		wget -O /usr/local/ehco/conf.py "https://cdn.jsdelivr.net/gh/sjlleo/ehco.sh/conf.py" &> null
 	fi
 	python3 /usr/local/ehco/conf.py
+	systemctl restart ehco
 }
 
 showMenu() {
