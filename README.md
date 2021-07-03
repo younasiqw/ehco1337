@@ -17,5 +17,5 @@ bash <(curl -fsSL https://git.io/ehco.sh)
 Or you can use this command for domestic server
 
 ```bash
-bash <(curl -fsSL https://cdn.jsdelivr.net/gh/sjlleo/ehco.sh/ehco.sh)
+bash <(curl -fsSL "https://cdn.jsdelivr.net/gh/sjlleo/ehco.sh/ehco.sh?no-cache=1.0beta")
 ```
