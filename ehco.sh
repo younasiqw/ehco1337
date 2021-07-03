@@ -73,7 +73,7 @@ InitialEhcoConfigure() {
 	\"web_port\": 9000,
 	\"web_token\": \"\",
 	\"enable_ping\": false,
-	\"relay_configs\": [
+	\"relay_configs\":[
 	]
 }" > $ehco_conf_dir/ehco.json
 
