@@ -294,9 +294,50 @@ rebootEhco() {
 	echo "[Success]Ehco已重启"
 }
 
+ConfPy() {
+	case ${SysID} in
+	*centos*)
+		python3 -h &> null
+		if [ $? -ne 0 ]; then
+			echo "[Info]缺少Python3包，正在安装...这将花费若干分钟"
+			yum install python3 -y &> null
+		fi
+		;;
+	*debian*)
+		python3 -h &> null
+		if [ $? -ne 0 ]; then
+			echo "[Info]缺少Python3包，正在安装...这将花费若干分钟"
+			apt-get update &> null
+			apt-get install python3 -y &> null
+		fi
+		;;
+	*ubuntu*)
+		python3 -h &> null
+		if [ $? -ne 0 ]; then
+			echo "[Info]缺少Python3包，正在安装...这可能将花费若干分钟"
+			apt-get update &> null
+			apt-get install python3 -y &> null
+		fi
+		;;
+	*)
+		python3 -h &> null
+		if [ $? -ne 0 ]; then
+			echo "[Error]未知系统，请自行安装Python3包"
+			exit 1
+		fi
+		;;
+	esac
+
+	if [ ! -e "/usr/local/ehco/conf.py" ]; then
+		echo "[Info]下载脚本文件中..."
+		wget -O /usr/local/ehco/conf.py "https://cdn.jsdelivr.net/gh/sjlleo/ehco.sh/conf.py" &> null
+	fi
+	python3 /usr/local/ehco/conf.py
+}
+
 showMenu() {
 	clear
-	echo -e "Ehco 一键配置脚本 beta by sjlleo\n\n1. 安装Ehco\n2. 卸载Ehco\n3. 停止Ehco\n4. 启动Ehco\n5. 重启Ehco\n6. 添加落地\中转记录\n7. 初始化配置\n"
+	echo -e "Ehco 一键配置脚本 beta by sjlleo\n\n1. 安装Ehco\n2. 卸载Ehco\n3. 停止Ehco\n4. 启动Ehco\n5. 重启Ehco\n6. 添加记录\n7. 查看修改删除记录（需安装Python3依赖）\n8. 初始化配置\n"
 
 	read -p "请输入选项：" num
 
@@ -321,6 +362,9 @@ showMenu() {
 		AddNewRelay
 		;;
 	7)
+		ConfPy
+		;;
+	8)
 		InitialEhcoConfigure
 		systemctl restart ehco
 		;;
