@@ -1,6 +1,13 @@
 # ehco.sh
 Ehco Tunnel Manage Shell
 
+## Notice
+
+This is an experimental Shell. Use it at your own risk.
+
+## TODO
+
+Waiting for the entry to be perfected.
 
 ## Usage
 
