@@ -58,8 +58,6 @@ def saveConf(json_data):
     f2 = open('/usr/local/ehco/ehco.json', 'w')
     f2.write(jsonContext)
     f2.close()
-    cmd = 'systemctl restart ehco'
-    os.system(cmd)
 
 f = open('/usr/local/ehco/ehco.json')
 content = f.read()
