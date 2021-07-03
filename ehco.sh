@@ -1,4 +1,16 @@
 #!/bin/bash
+# https://github.com/sjlleo/ehco.sh
+# Description: Ehco Tunnel configuration script
+# Author: sjlleo
+# Thank You For Using
+#
+#                    GNU GENERAL PUBLIC LICENSE
+#                       Version 3, 29 June 2007
+#
+# Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>
+# Everyone is permitted to copy and distribute verbatim copies
+# of this license document, but changing it is not allowed.
+
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 
