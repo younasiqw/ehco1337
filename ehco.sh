@@ -71,7 +71,7 @@ InitialEhcoConfigure() {
 		echo "
 {	
 	\"web_port\": 9000,
-	\"web_token\": \"\",
+	\"web_token\": \"leo123leo\",
 	\"enable_ping\": false,
 	\"relay_configs\":[
 	]
