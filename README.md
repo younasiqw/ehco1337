@@ -15,7 +15,7 @@ Waiting for the entry to be perfected.
 bash <(curl -fsSL https://git.io/ehco.sh)
 ```
 
-Or you can use this command for domestic server (CDN Cache may cause expired shell)
+Or you can use this command for domestic server
 
 ```bash
 bash <(curl -fsSL https://leo.moe/ehco.sh)
