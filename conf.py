@@ -1,4 +1,3 @@
-import os
 import json
 
 def ShowAllRelayConfigs(json_data):
@@ -50,6 +49,19 @@ def ModifyRelayConfigs(json_data, port):
         elif num == 3:
             json_data['relay_configs'][count]['transport_type'] = 'raw'
             json_data['relay_configs'][count]['tcp_remotes'][0] = remoteIP + ":" + remotePort
+        json_data['relay_configs'][count]['udp_remotes'][0] = remoteIP + ":" + remotePort
+    elif k['transport_type'] == 'raw':
+        # 落地模式
+        remotePort = input("请输入流量目标端口：")
+        print("请选择传输协议：\n1.mwss（稳定性极高且延时最低但传输速率最差）\n2.wss（较好的稳定性及较快的传输速率但延时较高）\n3.raw（无隧道直接转发、效率极高但无抗干扰能力）")
+        num = eval(input("输入序号（需与中转一致）："))
+        if num == 1:
+            json_data['relay_configs'][count]['listen_type'] = 'mwss'
+        elif num == 2:
+            json_data['relay_configs'][count]['listen_type'] = 'wss'
+        elif num == 3:
+            json_data['relay_configs'][count]['listen_type'] = 'raw'
+        json_data['relay_configs'][count]['tcp_remotes'][0] = "0.0.0.0:" + remotePort
         json_data['relay_configs'][count]['udp_remotes'][0] = remoteIP + ":" + remotePort
     saveConf(json_data)
 
