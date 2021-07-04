@@ -5,7 +5,7 @@ The `ehco` is contributed by [Ehco1996](https://github.com/Ehco1996), see the pr
 
 ## Experimental Reminder
 
-This is an experimental Shell. Use it at your own risk.
+This is an experimental script. Can be ONLY used in Linux. Use it at your own risk.
 
 ## Feature
 
