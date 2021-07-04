@@ -1,6 +1,8 @@
 # ehco.sh
 Ehco Tunnel Manage Script / Ehco 一键管理脚本
 
+The `ehco` is contributed by [Ehco1996](https://github.com/Ehco1996), see the project [here](https://github.com/Ehco1996/ehco). Thanks for his excellent project.
+
 ## Experimental Reminder
 
 This is an experimental Shell. Use it at your own risk.
