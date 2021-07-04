@@ -328,11 +328,11 @@ ConfPy() {
 		;;
 	esac
 
-	if [ ! -e "/usr/local/ehco/conf.py" ]; then
+	if [ ! -e "/usr/local/ehco/configure_a.py" ]; then
 		echo "[Info]下载脚本文件中..."
-		wget -O /usr/local/ehco/conf.py "https://cdn.jsdelivr.net/gh/sjlleo/ehco.sh/conf.py" &> null
+		wget -O /usr/local/ehco/configure_a.py "https://cdn.jsdelivr.net/gh/sjlleo/ehco.sh/configure_a.py" &> null
 	fi
-	python3 /usr/local/ehco/conf.py
+	python3 /usr/local/ehco/configure_a.py
 	systemctl restart ehco
 }
 
