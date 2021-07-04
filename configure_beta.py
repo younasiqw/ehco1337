@@ -62,7 +62,7 @@ def ModifyRelayConfigs(json_data, port):
         elif num == 3:
             json_data['relay_configs'][count]['listen_type'] = 'raw'
         json_data['relay_configs'][count]['tcp_remotes'][0] = "0.0.0.0:" + remotePort
-        json_data['relay_configs'][count]['udp_remotes'][0] = remoteIP + ":" + remotePort
+        json_data['relay_configs'][count]['udp_remotes'][0] = "0.0.0.0:" + remotePort
     saveConf(json_data)
 
 def saveConf(json_data):
