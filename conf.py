@@ -62,6 +62,7 @@ def saveConf(json_data):
 f = open('/usr/local/ehco/ehco.json')
 content = f.read()
 json_data = json.loads(content)
+f.close()
 ShowAllRelayConfigs(json_data)
 print("请选择功能：\n1. 修改转发\n2. 删除转发\n3. 查看转发")
 num = eval(input('请选择序号：'))
