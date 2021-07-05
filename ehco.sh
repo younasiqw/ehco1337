@@ -376,11 +376,11 @@ ConfPy() {
 	 	pip3 install requests
 	fi
 	# 脚本文件
-	if [ ! -e "/usr/local/ehco/conf.py" ]; then
+	if [ ! -e "/usr/local/ehco/configurev01.py" ]; then
 		echo "[Info]下载脚本文件中..."
-		wget -O /usr/local/ehco/conf.py "https://cdn.jsdelivr.net/gh/sjlleo/ehco.sh/conf.py" &> null
+		wget -O /usr/local/ehco/conf.py "https://cdn.jsdelivr.net/gh/sjlleo/ehco.sh/configurev01.py" &> null
 	fi
-	python3 /usr/local/ehco/conf.py
+	python3 /usr/local/ehco/configurev01.py
 }
 
 showMenu() {
