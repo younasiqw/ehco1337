@@ -1,7 +1,12 @@
 import dbus
 import json
 import requests
-
+'''
+-----------------------------------------
+Author: sjlleo
+Description: Ehco Configure Manage Script
+-----------------------------------------
+'''
 def ShowAllRelayConfigs(json_data):
     print("当前有"+str(len(json_data['relay_configs']))+"条中转")
     count = 1
