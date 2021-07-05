@@ -15,6 +15,8 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 
+[[ $EUID -ne 0 ]] && echo -e "[Error]请以root用户或者sudo提权运行本脚本！" && exit 1
+
 ehco_version="1.0.7"
 ehco_conf_dir="/usr/local/ehco/"
 CPUFrame=$(arch)
