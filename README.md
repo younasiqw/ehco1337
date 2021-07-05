@@ -15,7 +15,7 @@ This is an experimental script. Can be ONLY used in Linux. Use it at your own ri
 ## TODO
 
 - [ ] Multistage Relay List
-- [ ] Support stream balancing configuration
+- [X] Support stream balancing configuration
 
 ## Usage
 
