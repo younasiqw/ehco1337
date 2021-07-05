@@ -23,6 +23,16 @@ if [ ! -d $ehco_conf_dir ]; then
 	mkdir $ehco_conf_dir
 fi
 
+python_model_check()
+{
+  if python3 -c "import $1" >/dev/null 2>&1
+  then
+      echo "1"
+  else
+      echo "0"
+  fi
+}
+
 InitialEhco() {
     if [ ! -e "/usr/bin/ehco" ]; then
     	url="https://github.com/Ehco1996/ehco/releases/download/v$ehco_version/ehco_${ehco_version}_linux_$1"
@@ -73,7 +83,7 @@ InitialEhcoConfigure() {
 	\"web_port\": 9000,
 	\"web_token\": \"leo123leo\",
 	\"enable_ping\": false,
-	\"relay_configs\":[
+	\"relay_configs\": [
 	]
 }" > $ehco_conf_dir/ehco.json
 
@@ -179,7 +189,7 @@ AddNewRelay() {
 		esac
 		unset num
 		
-		sed -i "s/\"relay_configs\"\:\[/&$conf/" $ehco_conf_dir/ehco.json
+		sed -i "s/\"relay_configs\"\: \[/&$conf/" $ehco_conf_dir/ehco.json
 		;;
 
 
@@ -210,7 +220,7 @@ AddNewRelay() {
 		esac
 		unset num
 		conf="\n\t{\n\t\t\"listen\": \"0.0.0.0:$listenPort\",\n\t\t\"listen_type\": \"$transport_type\",\n\t\t\"transport_type\": \"raw\",\n\t\t\"tcp_remotes\": [\"0.0.0.0:$remotePort\"],\n\t\t\"udp_remotes\": [\"0.0.0.0:$remotePort\"]\n\t}$endl"
-		sed -i "s/\"relay_configs\"\:\[/&$conf/" $ehco_conf_dir/ehco.json
+		sed -i "s/\"relay_configs\"\: \[/&$conf/" $ehco_conf_dir/ehco.json
 		;;
 		
 		# 中继模式（这个坑以后再填）
@@ -327,13 +337,50 @@ ConfPy() {
 		fi
 		;;
 	esac
-
-	if [ ! -e "/usr/local/ehco/configure_beta.py" ]; then
-		echo "[Info]下载脚本文件中..."
-		wget -O /usr/local/ehco/configure_beta.py "https://cdn.jsdelivr.net/gh/sjlleo/ehco.sh/configure_beta.py" &> null
+	# 检查Python3模块环境
+	result=`python_model_check dbus`
+	if [ $result == 1 ]
+	then
+		echo "check python3-dbus......ok"
+	else
+		echo "check python3-dbus......no"
+	    case ${SysID} in
+		*centos*)
+			echo "[Info]安装python3-dbus包..."
+			yum install python3-dbus -y &> /dev/null
+			;;
+		*debian*)
+			echo "[Info]更新APT源..."
+			apt update &> /dev/null
+			echo "[Info]安装python3-dbus包..."
+			apt-get install python3-dbus -y &> /dev/null
+			;;
+		*ubuntu*)
+			echo "[Info]更新APT源..."
+			apt update &> /dev/null
+			echo "[Info]安装python3-dbus包..."
+			apt-get install python3-dbus -y &> /dev/null
+			;;
+		*)
+			echo "[Error]未知系统，请自行安装python3-dbus"
+			exit 1
+	    	;;
+	  esac
 	fi
-	python3 /usr/local/ehco/configure_beta.py
-	systemctl restart ehco
+	result=`python_model_check requests`
+	if [ $result == 1 ]
+	then
+		echo "check requests......ok"
+	else
+		echo "check requests......no"
+	 	pip3 install requests
+	fi
+	# 脚本文件
+	if [ ! -e "/usr/local/ehco/conf.py" ]; then
+		echo "[Info]下载脚本文件中..."
+		wget -O /usr/local/ehco/conf.py "https://cdn.jsdelivr.net/gh/sjlleo/ehco.sh/conf.py" &> null
+	fi
+	python3 /usr/local/ehco/conf.py
 }
 
 showMenu() {
