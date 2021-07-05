@@ -351,13 +351,13 @@ ConfPy() {
 			;;
 		*debian*)
 			echo "[Info]更新APT源..."
-			apt update &> /dev/null
+			apt-get update &> /dev/null
 			echo "[Info]安装python3-dbus包..."
 			apt-get install python3-dbus -y &> /dev/null
 			;;
 		*ubuntu*)
 			echo "[Info]更新APT源..."
-			apt update &> /dev/null
+			apt-get update &> /dev/null
 			echo "[Info]安装python3-dbus包..."
 			apt-get install python3-dbus -y &> /dev/null
 			;;
@@ -373,7 +373,35 @@ ConfPy() {
 		echo "check requests......ok"
 	else
 		echo "check requests......no"
-	 	pip3 install requests
+	 	pip3 install requests &> /dev/null
+	 	
+	 	if [ $? -ne 0 ]; then
+	 		echo "[Info]检测到Minimal精简版系统，未内置pip管理工具"
+	 		case ${SysID} in
+			*centos*)
+				echo "[Info]开始安装python3-pip包..."
+				yum install python3-pip -y &> /dev/null
+				;;
+			*debian*)
+				echo "[Info]更新APT源..."
+				apt update &> /dev/null
+				echo "[Info]开始安装python3-pip包..."
+				apt install python3-pip -y &> /dev/null
+				;;
+			*ubuntu*)
+				echo "[Info]更新APT源..."
+				apt update &> /dev/null
+				echo "[Info]开始安装python3-pip包..."
+				apt install python3-pip -y &> /dev/null
+				;;
+			*)
+				echo "[Error]未知系统，请自行安装python3-pip"
+				exit 1
+				;;
+			esac
+		fi
+
+		pip3 install requests &> /dev/null
 	fi
 	# 脚本文件
 	if [ ! -e "/usr/local/ehco/configurev01.py" ]; then
