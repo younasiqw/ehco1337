@@ -3,6 +3,7 @@ import json
 import requests
 '''
 -----------------------------------------
+Version: 0.1
 Author: sjlleo
 Description: Ehco Configure Manage Script
 -----------------------------------------
