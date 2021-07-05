@@ -1,5 +1,6 @@
 #!/bin/bash
 # https://github.com/sjlleo/ehco.sh
+# Version: 0.1
 # Description: Ehco Tunnel configuration script
 # Author: sjlleo
 # Thank You For Using
