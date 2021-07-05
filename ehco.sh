@@ -309,14 +309,14 @@ ConfPy() {
 	*centos*)
 		python3 -h &> null
 		if [ $? -ne 0 ]; then
-			echo "[Info]缺少Python3包，正在安装...这将花费若干分钟"
+			echo "[Info]缺少Python3包，正在安装...这可能将花费若干分钟"
 			yum install python3 -y &> null
 		fi
 		;;
 	*debian*)
 		python3 -h &> null
 		if [ $? -ne 0 ]; then
-			echo "[Info]缺少Python3包，正在安装...这将花费若干分钟"
+			echo "[Info]缺少Python3包，正在安装...这可能将花费若干分钟"
 			apt-get update &> null
 			apt-get install python3 -y &> null
 		fi
@@ -352,7 +352,7 @@ ConfPy() {
 		*debian*)
 			echo "[Info]更新APT源..."
 			apt-get update &> /dev/null
-			echo "[Info]安装python3-dbus包..."
+			echo "[Info]安装python3-dbus包...对于系统性能较差的VPS，可能将花费若干分钟"
 			apt-get install python3-dbus -y &> /dev/null
 			;;
 		*ubuntu*)
@@ -373,6 +373,7 @@ ConfPy() {
 		echo "check requests......ok"
 	else
 		echo "check requests......no"
+		echo "[Info] 开始安装requests包"
 	 	pip3 install requests &> /dev/null
 	 	
 	 	if [ $? -ne 0 ]; then
@@ -399,9 +400,8 @@ ConfPy() {
 				exit 1
 				;;
 			esac
+			pip3 install requests &> /dev/null
 		fi
-
-		pip3 install requests &> /dev/null
 	fi
 	# 脚本文件
 	if [ ! -e "/usr/local/ehco/configurev01.py" ]; then
