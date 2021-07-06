@@ -86,7 +86,7 @@ InitialEhcoConfigure() {
 	\"web_port\": 9000,
 	\"web_token\": \"leo123leo\",
 	\"enable_ping\": false,
-	\"relay_configs\": [
+	\"relay_configs\":[
 	]
 }" > $ehco_conf_dir/ehco.json
 
@@ -192,7 +192,7 @@ AddNewRelay() {
 		esac
 		unset num
 		
-		sed -i "s/\"relay_configs\"\: \[/&$conf/" $ehco_conf_dir/ehco.json
+		sed -i "s/\"relay_configs\"\:\[/&$conf/" $ehco_conf_dir/ehco.json
 		;;
 
 
@@ -223,7 +223,7 @@ AddNewRelay() {
 		esac
 		unset num
 		conf="\n\t{\n\t\t\"listen\": \"0.0.0.0:$listenPort\",\n\t\t\"listen_type\": \"$transport_type\",\n\t\t\"transport_type\": \"raw\",\n\t\t\"tcp_remotes\": [\"0.0.0.0:$remotePort\"],\n\t\t\"udp_remotes\": [\"0.0.0.0:$remotePort\"]\n\t}$endl"
-		sed -i "s/\"relay_configs\"\: \[/&$conf/" $ehco_conf_dir/ehco.json
+		sed -i "s/\"relay_configs\"\:\[/&$conf/" $ehco_conf_dir/ehco.json
 		;;
 		
 		# 中继模式（这个坑以后再填）
