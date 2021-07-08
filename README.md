@@ -3,6 +3,14 @@ Ehco Tunnel Manage Script / Ehco 一键管理脚本
 
 [English Document](https://github.com/sjlleo/ehco.sh/blob/main/README.md) | [中文版说明文档](https://leo.moe/daily/ehco-Script.html)
 
+## More Scripts
+
+> 不想安装各种各样的依赖？希望更简洁吗？由[@missuo](https://github.com/missuo)写这款脚本适合你！
+
+https://github.com/missuo/Ehcoo - Made by missuo
+
+## Ehco Introduction
+
 The `ehco` is contributed by [Ehco1996](https://github.com/Ehco1996), see the project [here](https://github.com/Ehco1996/ehco). Thanks for his excellent project.
 
 ![image](https://user-images.githubusercontent.com/13616352/124421686-93d46280-dd94-11eb-85ff-348c81a58ad1.png)
