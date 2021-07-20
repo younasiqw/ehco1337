@@ -349,6 +349,8 @@ ConfPy() {
 		echo "check python3-dbus......no"
 	    case ${SysID} in
 		*centos*)
+			ehco "[info]添加并更新EPEL源中..."
+			yum install epel-release -y &> /dev/null
 			echo "[Info]安装python3-dbus包..."
 			yum install python3-dbus -y &> /dev/null
 			;;
@@ -383,8 +385,6 @@ ConfPy() {
 	 		echo "[Info]检测到Minimal精简版系统，未内置pip管理工具"
 	 		case ${SysID} in
 			*centos*)
-				ehco "[info]添加并更新EPEL源中..."
-				yum install epel-release -y &> /dev/null
 				echo "[Info]开始安装python3-pip包..."
 				yum install python3-pip -y &> /dev/null
 				;;
