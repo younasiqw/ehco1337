@@ -119,7 +119,7 @@ def ModifyRelayConfigs(json_data, port):
 
 def saveConf(json_data, flag=False):
     if flag:
-        jsonContext = "{\n\"web_port\": 9000,\n\"web_token\": \"leo123leo\",\n\"enable_ping\": false,\n\"relay_configs\": [\n]\n}"
+        jsonContext = "{\n\"web_port\": 9000,\n\"web_token\": \"leo123leo\",\n\"enable_ping\": false,\n\"relay_configs\":[\n]\n}"
     else:
         jsonContext = json.dumps(json_data,sort_keys=True, indent=4, separators=(',', ':'))
     f2 = open('/usr/local/ehco/ehco.json', 'w')
