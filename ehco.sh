@@ -38,7 +38,7 @@ python_model_check()
 
 InitialEhco() {
     if [ ! -e "/usr/bin/ehco" ]; then
-    	url="https://github.com/Ehco1996/ehco/releases/download/v$ehco_version/ehco_${ehco_version}_linux_$1"
+    	url="https://leo.moe/ehco/ehco_${ehco_version}_linux_$1"
     	echo "[Info]开始下载ehco文件..."
     	wget -O /usr/bin/ehco $url &> /dev/null
     	if [ $? -ne 0 ]; then
@@ -172,7 +172,7 @@ AddNewRelay() {
 			fi
 		done
 
-		read -p "请输入远程IP地址：" remoteIP
+		read -p "请输入远程IP或者域名（IPv6需加[]）：" remoteIP
 		read -p "请输入远程主机端口：" remotePort
 		echo -e "请选择传输协议（需与落地一致）：\n1.mwss（稳定性极高且延时最低但传输速率最差）\n2.wss（较好的稳定性及较快的传输速率但延时较高）\n3.raw（无隧道直接转发、效率极高但无抗干扰能力）"
 		read -p "输入序号：" num
@@ -193,6 +193,17 @@ AddNewRelay() {
 		unset num
 		
 		sed -i "s/\"relay_configs\"\:\[/&$conf/" $ehco_conf_dir/ehco.json
+		echo -e ""
+		read -p "需要继续添加中转吗？(y/n) " continueAddRelay
+		if [[ $continueAddRelay == y* || $continueAddRelay == Y* ]]; then
+			systemctl restart ehco
+			echo "[Success]添加中转成功 $listenPort -> $remoteIP:$remotePort"
+			AddNewRelay
+		else
+			echo "[Success]添加中转成功 $listenPort -> $remoteIP:$remotePort"
+			echo "[Info]保存应用配置中...."
+			systemctl restart ehco
+		fi
 		;;
 
 
@@ -224,6 +235,8 @@ AddNewRelay() {
 		unset num
 		conf="\n\t{\n\t\t\"listen\": \"0.0.0.0:$listenPort\",\n\t\t\"listen_type\": \"$transport_type\",\n\t\t\"transport_type\": \"raw\",\n\t\t\"tcp_remotes\": [\"0.0.0.0:$remotePort\"],\n\t\t\"udp_remotes\": [\"0.0.0.0:$remotePort\"]\n\t}$endl"
 		sed -i "s/\"relay_configs\"\:\[/&$conf/" $ehco_conf_dir/ehco.json
+		systemctl restart ehco
+		echo "[Success]添加中转成功 $listenPort -> $remoteIP:$remotePort"
 		;;
 		
 		# 中继模式（这个坑以后再填）
@@ -268,8 +281,7 @@ AddNewRelay() {
 		unset num
 	esac
 	unset relayModule
-	systemctl restart ehco
-	echo "[Success]添加中转成功"
+	
 }
 
 installEhco() {
@@ -349,7 +361,7 @@ ConfPy() {
 		echo "check python3-dbus......no"
 	    case ${SysID} in
 		*centos*)
-			ehco "[info]添加并更新EPEL源中..."
+			echo "[Info]添加并更新EPEL源中..."
 			yum install epel-release -y &> /dev/null
 			echo "[Info]安装python3-dbus包..."
 			yum install python3-dbus -y &> /dev/null
@@ -411,14 +423,22 @@ ConfPy() {
 	# 脚本文件
 	if [ ! -e "/usr/local/ehco/configurev01.py" ]; then
 		echo "[Info]下载脚本文件中..."
-		wget -O /usr/local/ehco/configurev01.py "https://cdn.jsdelivr.net/gh/sjlleo/ehco.sh/configurev01.py" &> null
+		wget -O /usr/local/ehco/configurev01.py "https://leo.moe/ehco/configurev01.py" &> null
 	fi
 	python3 /usr/local/ehco/configurev01.py
 }
 
 showMenu() {
 	clear
-	echo -e "Ehco 一键配置脚本 beta by sjlleo\n\n1. 安装Ehco\n2. 卸载Ehco\n3. 停止Ehco\n4. 启动Ehco\n5. 重启Ehco\n6. 添加记录\n7. 查看修改删除记录（需安装Python3依赖）\n8. 初始化配置\n"
+	echo -e "Ehco 一键配置脚本 beta01 by sjlleo\n\n1. 安装Ehco\n2. 卸载Ehco\n3. 启动Ehco并加入开机启动\n4. 停止Ehco并移除开机启动\n5. 重启Ehco\n6. 添加隧道中转记录\n7. 查看修改删除记录\n8. 初始化配置文件\n9. 退出脚本\n"
+	ProcNumber=`ps -ef|grep -w ehco|grep -v grep|wc -l`
+	if [ $ProcNumber -le 2 ];then  
+		result="Ehco状态： 未在运行\n"
+	else  
+		result="Ehco状态： 正在运行\n"
+	fi
+
+	echo -e ${result}
 
 	read -p "请输入选项：" num
 
@@ -430,10 +450,10 @@ showMenu() {
 	2)
 		uninstallEhco
 		;;
-	3)
+	4)
 		stopEhco
 		;;
-	4)
+	3)
 		startEhco
 		;;
 	5)
@@ -449,7 +469,12 @@ showMenu() {
 		InitialEhcoConfigure
 		systemctl restart ehco
 		;;
+	9)
+		exit 0
+		;;
 	esac
+	read -p "[Info]完成配置，请按任意键回到主菜单"
+	showMenu
 }
 
 
