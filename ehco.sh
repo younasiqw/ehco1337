@@ -201,14 +201,14 @@ AddNewRelay() {
 		unset num
 		
 		sed -i "s/\"relay_configs\"\:\[/&$conf/" $ehco_conf_dir/ehco.json
-		echo -e -e ""
-		read -p "需要继续添加中转吗？${blue_prefix}(y/n)${plain_prefix} " continueAddRelay
+		echo -e -n "\n需要继续添加中转吗？${blue_prefix}(y/n)${plain_prefix} "
+		read continueAddRelay
 		if [[ $continueAddRelay == y* || $continueAddRelay == Y* ]]; then
 			systemctl restart ehco
-			echo -e "${green_prefix}[Success]${plain_prefix}添加中转成功 $listenPort -> $remoteIP:$remotePort"
+			echo -e "${green_prefix}[Success]${plain_prefix} 添加中转成功 $listenPort -> $remoteIP:$remotePort"
 			AddNewRelay
 		else
-			echo -e "${green_prefix}[Success]${plain_prefix}添加中转成功 $listenPort -> $remoteIP:$remotePort"
+			echo -e "${green_prefix}[Success]${plain_prefix} 添加中转成功 $listenPort -> $remoteIP:$remotePort"
 			echo -e "${blue_prefix}[Info]${plain_prefix} 保存应用配置中...."
 			systemctl restart ehco
 		fi
@@ -244,7 +244,7 @@ AddNewRelay() {
 		conf="\n\t{\n\t\t\"listen\": \"0.0.0.0:$listenPort\",\n\t\t\"listen_type\": \"$transport_type\",\n\t\t\"transport_type\": \"raw\",\n\t\t\"tcp_remotes\": [\"0.0.0.0:$remotePort\"],\n\t\t\"udp_remotes\": [\"0.0.0.0:$remotePort\"]\n\t}$endl"
 		sed -i "s/\"relay_configs\"\:\[/&$conf/" $ehco_conf_dir/ehco.json
 		systemctl restart ehco
-		echo -e "${green_prefix}[Success]${plain_prefix}添加中转成功 $listenPort -> $remoteIP:$remotePort"
+		echo -e "${green_prefix}[Success]${plain_prefix} 添加中转成功 $listenPort -> $remoteIP:$remotePort"
 		;;
 		
 		# 中继模式（这个坑以后再填）
@@ -259,7 +259,7 @@ AddNewRelay() {
 		done
 		read -p "请输入下一个链路的IP地址：" remoteIP
 		read -p "请输入下一个链路的端口：" remotePort
-		echo -e -e "请选择传输协议（监听端，请与上一个链路的中转传输协议保持一致）：\n1.mwss（稳定性极高且延时最低但传输速率最差）\n2.wss（较好的稳定性及较快的传输速率但延时较高）\n3.raw（无隧道直接转发、效率极高但无抗干扰能力）"
+		echo -e "请选择传输协议（监听端，请与上一个链路的中转传输协议保持一致）：\n1.mwss（稳定性极高且延时最低但传输速率最差）\n2.wss（较好的稳定性及较快的传输速率但延时较高）\n3.raw（无隧道直接转发、效率极高但无抗干扰能力）"
 		read -p "输入序号（需与中转一致）：" num
 		case {$num} in
 			*1*)
@@ -273,7 +273,7 @@ AddNewRelay() {
 				;;
 		esac
 		unset num
-		echo -e -e "请选择传输协议（发送端，请与下一个链路的中转传输协议保持一致）：\n1.mwss（稳定性极高且延时最低但传输速率最差）\n2.wss（较好的稳定性及较快的传输速率但延时较高）\n3.raw（无隧道直接转发、效率极高但无抗干扰能力）"
+		echo -e "请选择传输协议（发送端，请与下一个链路的中转传输协议保持一致）：\n1.mwss（稳定性极高且延时最低但传输速率最差）\n2.wss（较好的稳定性及较快的传输速率但延时较高）\n3.raw（无隧道直接转发、效率极高但无抗干扰能力）"
 		read -p "输入序号（需与中转一致）：" num
 		case {$num} in
 			*1*)
@@ -307,24 +307,24 @@ uninstallEhco() {
 	systemctl disable ehco
 	rm -rf /usr/local/ehco/
 	rm -f /usr/bin/ehco
-	echo -e "${green_prefix}[Success]${plain_prefix}卸载成功"
+	echo -e "${green_prefix}[Success]${plain_prefix} 卸载成功"
 }
 
 stopEhco() {
 	systemctl stop ehco
 	systemctl disable ehco
-	echo -e "${green_prefix}[Success]${plain_prefix}Ehco已暂停"
+	echo -e "${green_prefix}[Success]${plain_prefix} Ehco已暂停"
 }
 
 startEhco() {
 	systemctl start ehco
 	systemctl enable ehco
-	echo -e "${green_prefix}[Success]${plain_prefix}Ehco已开启"
+	echo -e "${green_prefix}[Success]${plain_prefix} Ehco已开启"
 }
 
 rebootEhco() {
 	systemctl restart ehco
-	echo -e "${green_prefix}[Success]${plain_prefix}Ehco已重启"
+	echo -e "${green_prefix}[Success]${plain_prefix} Ehco已重启"
 }
 
 ConfPy() {
@@ -446,7 +446,7 @@ showMenu() {
 		result="Ehco状态： ${green_prefix}正在运行${plain_prefix}\n"
 	fi
 
-	echo -e -e ${result}
+	echo -e ${result}
 
 	read -p "请输入选项：" num
 
@@ -481,7 +481,8 @@ showMenu() {
 		exit 0
 		;;
 	esac
-	read -p "[Info]完成配置，请按任意键回到主菜单"
+	echo -e "${blue_prefix}[Info]${plain_prefix} 完成配置，请按任意键回到主菜单"
+	read
 	showMenu
 }
 
