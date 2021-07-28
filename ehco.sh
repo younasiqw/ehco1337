@@ -163,6 +163,7 @@ AddNewRelay() {
         echo -e "${blue_prefix}[Info]${plain_prefix} 一切正常，继续添加中转..."
     fi
 	echo -e "添加新的中转记录"
+
 	if [ $(cat $ehco_conf_dir/ehco.json | grep -c listen) -gt 1 ]; then
 		endl=","
 	fi
