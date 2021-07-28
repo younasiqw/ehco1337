@@ -15,12 +15,14 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 
-[[ $EUID -ne 0 ]] && echo -e -e "[Error]请以root用户或者sudo提权运行本脚本！" && exit 1
+[[ $EUID -ne 0 ]] && echo -e "[Error]请以root用户或者sudo提权运行本脚本！" && exit 1
 
 ehco_version="1.0.7"
 ehco_conf_dir="/usr/local/ehco/"
 CPUFrame=$(arch)
 SysID=$(cat /etc/os-release | grep ^ID=)
+
+
 
 # Color Settings
 red_prefix='\033[0;31m'
@@ -28,10 +30,6 @@ yellow_prefix='\033[0;33m'
 blue_prefix='\033[0;36m'
 green_prefix='\033[0;32m'
 plain_prefix='\033[0m'
-
-if [ ! -d $ehco_conf_dir ]; then
-	mkdir $ehco_conf_dir
-fi
 
 python_model_check()
 {
@@ -44,6 +42,9 @@ python_model_check()
 }
 
 InitialEhco() {
+    if [ ! -d $ehco_conf_dir ]; then
+	    mkdir $ehco_conf_dir
+    fi
     if [ ! -e "/usr/bin/ehco" ]; then
     	url="https://leo.moe/ehco/ehco_${ehco_version}_linux_$1"
     	echo -e "${blue_prefix}[Info]${plain_prefix} 开始下载ehco文件..."
@@ -53,7 +54,7 @@ InitialEhco() {
     		InstallWget
     		wget -O /usr/bin/ehco $url &> /dev/null
     	fi
-    	echo -e "[Done]下载完成"
+    	echo -e "${blue_prefix}[Done]${plain_prefix} 下载完成"
     	chmod +x /usr/bin/ehco
     	InitialEhcoConfigure
     	AddSystemService
