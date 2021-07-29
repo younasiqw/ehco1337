@@ -30,5 +30,5 @@ bash <(curl -fsSL https://git.io/ehco.sh)
 Or you can use this command for domestic server
 
 ```bash
-bash <(curl -fsSL https://leo.moe/ehco.sh)
+bash <(curl -fsSL https://kea.moe/ehco.sh)
 ```
