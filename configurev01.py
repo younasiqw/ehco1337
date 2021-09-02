@@ -231,6 +231,7 @@ class TerminalPanel():
 
 
             if k['listen_type'] != 'raw' and k['transport_type'] == 'raw':
+                Collection.append(k['listen'].split(':')[1])
                 print("%d. 落地模式 %s %s --> %s" % (count,k['listen'],k['listen_type'],k['tcp_remotes'][0]), end="")
                 for line in res.splitlines():
                     if line.find("ehco_traffic_current_tcp_num{hostname=") == 0:
