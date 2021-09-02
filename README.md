@@ -7,7 +7,9 @@ Ehco Tunnel Manage Script / Ehco 一键管理脚本
 
 2021.09.02
 
-本次更新尝试采用SQLite3轻量数据库（Beta特性）来保存ehco的各中转流量记录，之前只要是重启或者添加和删除都会导致流量信息的丢失。
+之前有很多小伙伴反馈到ehco的流量记录重启就会丢失，为了解决这个问题：
+
+本次更新尝试采用SQLite3轻量数据库（Beta特性）来保存ehco的各中转流量历史记录。
 
 ## Ehco Introduction
 
