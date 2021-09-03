@@ -431,11 +431,11 @@ ConfPy() {
 		fi
 	fi
 	# 脚本文件
-	if [ ! -e "/usr/local/ehco/configurev02beta02.py" ]; then
+	if [ ! -e "/usr/local/ehco/ehcoConfigure_beta01.py" ]; then
 		echo -e "${blue_prefix}[Info]${plain_prefix} 下载脚本文件中..."
-		wget -O /usr/local/ehco/configurev02beta02.py "https://leo.moe/ehco/configurev01.py" &> null
+		wget -O /usr/local/ehco/ehcoConfigure_beta01.py "https://leo.moe/ehco/ehcoConfigure.py" &> null
 	fi
-	python3 /usr/local/ehco/configurev02beta02.py
+	python3 /usr/local/ehco/ehcoConfigure_beta01.py
 }
 
 showMenu() {
