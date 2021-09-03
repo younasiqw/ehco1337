@@ -138,6 +138,8 @@ WantedBy=multi-user.target" > $systemctlDIR/ehco.service
 }
 
 AddNewRelay() {
+    echo "现在添加中转的功能已经和修改删除中转的脚本整合在一起啦！"
+    return
     echo -e "${blue_prefix}[Info]${plain_prefix} 正在检测必要组件是否工作正常.."
     netstat -help &> /dev/null
     if [ $? -ne 0 ]; then
@@ -440,7 +442,7 @@ ConfPy() {
 
 showMenu() {
 	clear
-	echo -e -e "Ehco 一键配置脚本 ${yellow_prefix}v1.1 Beta${plain_prefix} by ${blue_prefix}@sjlleo${plain_prefix}\n\n${green_prefix}1.${plain_prefix} 安装Ehco\n${green_prefix}2.${plain_prefix} 卸载Ehco\n${green_prefix}3.${plain_prefix} 启动Ehco并加入开机启动\n${green_prefix}4.${plain_prefix} 停止Ehco并移除开机启动\n${green_prefix}5.${plain_prefix} 重启Ehco\n${green_prefix}6.${plain_prefix} 添加隧道中转记录\n${green_prefix}7.${plain_prefix} 查看修改删除记录\n${green_prefix}8.${plain_prefix} 初始化配置文件\n${green_prefix}9.${plain_prefix} 退出脚本\n"
+	echo -e -e "Ehco 一键配置脚本 ${yellow_prefix}v1.1 Beta${plain_prefix} by ${blue_prefix}@sjlleo${plain_prefix}\n\n${green_prefix}1.${plain_prefix} 安装Ehco\n${green_prefix}2.${plain_prefix} 卸载Ehco\n${green_prefix}3.${plain_prefix} 启动Ehco并加入开机启动\n${green_prefix}4.${plain_prefix} 停止Ehco并移除开机启动\n${green_prefix}5.${plain_prefix} 重启Ehco\n${green_prefix}7.${plain_prefix} 管理中转记录(New!)\n${green_prefix}${green_prefix}8.${plain_prefix} 初始化配置文件\n${green_prefix}9.${plain_prefix} 退出脚本\n"
 	ProcNumber=`ps -ef|grep -w ehco|grep -v grep|wc -l`
 	if [ $ProcNumber -le 0 ];then  
 		result="Ehco状态： ${yellow_prefix}未在运行${plain_prefix}\n"
