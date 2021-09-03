@@ -5,7 +5,13 @@ Ehco Tunnel Manage Script / Ehco 一键管理脚本
 
 ## 更新日志
 
-2021.09.02
+#### 2021.09.03
+
+近期来最大的一次大版本更新，首次支持了负载均衡的转发配置，添加转发的功能使用Python完全重写，彻底解决了小概率出现添加失败的Bug。
+
+优化了脚本性能，性能较差的VPS在添加转发时不会再有卡顿感，界面细节上进行了打磨，脚本预设了更多的异常处理，会显示更具体的原因可以继续操作而不会莫名退出。
+
+#### 2021.09.02
 
 之前有很多小伙伴反馈到ehco的流量记录重启就会丢失，为了解决这个问题：
 
@@ -26,7 +32,7 @@ The `ehco` is contributed by [Ehco1996](https://github.com/Ehco1996), see the pr
 
 ## TODO
 
-- [ ] Multistage Relay List
+- [X] Multistage Relay List
 - [X] Support stream balancing configuration
 
 ## Usage
