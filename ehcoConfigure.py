@@ -126,8 +126,8 @@ class TerminalPanel():
 
         # 将数据可视化
         self.ShowAllRelayConfigs(json_data)
-        print("请选择功能：\n%s1.%s 添加转发（实验功能）\n%s2.%s 修改转发\n%s3.%s 删除转发" 
-            %(colorConst.green_prefix,colorConst.plain_prefix,colorConst.green_prefix,colorConst.plain_prefix,colorConst.green_prefix,colorConst.plain_prefix))
+        print("请选择功能：\n%s1.%s 添加转发（实验功能）\n%s2.%s 修改转发\n%s3.%s 删除转发\n%s4.%s 退出脚本" 
+            %(colorConst.green_prefix,colorConst.plain_prefix,colorConst.green_prefix,colorConst.plain_prefix,colorConst.green_prefix,colorConst.plain_prefix,colorConst.green_prefix,colorConst.plain_prefix))
         num = eval(input('请选择序号：'))
         if num == 1:
             self.AddRelayConfigs(json_data)
@@ -148,7 +148,7 @@ class TerminalPanel():
             self.ShowAllRelayConfigs(json_data)
             self.restartEhcoService()
         else:
-            self.ShowAllRelayConfigs(json_data)
+            pass
 
     def checkPortIsOpen(self,port):
         s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
