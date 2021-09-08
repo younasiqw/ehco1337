@@ -17,7 +17,7 @@ export PATH
 
 [[ $EUID -ne 0 ]] && echo -e "[Error]请以root用户或者sudo提权运行本脚本！" && exit 1
 
-ehco_version="1.0.7"
+ehco_version="1.1.0"
 ehco_conf_dir="/usr/local/ehco/"
 CPUFrame=$(arch)
 SysID=$(cat /etc/os-release | grep ^ID=)
