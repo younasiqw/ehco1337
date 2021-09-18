@@ -3,6 +3,8 @@ Ehco Tunnel Manage Script / Ehco 一键管理脚本
 
 [English Document](https://github.com/sjlleo/ehco.sh/blob/main/README.md) | [中文版说明文档](https://leo.moe/daily/ehco-Script.html)
 
+**这是一个还在测试中的 Beta 脚本，没人保证它一定可用！**
+
 ## 更新日志
 
 #### 2021.09.03
