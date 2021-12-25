@@ -435,7 +435,7 @@ ConfPy() {
 	# 脚本文件
 	if [ ! -e "/usr/local/ehco/ehcoConfigure_beta01.py" ]; then
 		echo -e "${blue_prefix}[Info]${plain_prefix} 下载脚本文件中..."
-		wget -O /usr/local/ehco/ehcoConfigure_beta01.py "https://git.io/Jy36z" &> null
+		wget --no-check-certificate -O /usr/local/ehco/ehcoConfigure_beta01.py "https://git.io/Jy36z" &> null
 	fi
 	python3 /usr/local/ehco/ehcoConfigure_beta01.py
 }
