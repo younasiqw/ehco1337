@@ -48,7 +48,7 @@ InitialEhco() {
     if [ ! -e "/usr/bin/ehco" ]; then
     	url="https://github.com/Ehco1996/ehco/releases/download/v1.0.7/ehco_${ehco_version}_linux_amd64"
     	echo -e "${blue_prefix}[Info]${plain_prefix} 开始下载ehco文件..."
-    	wget -O /usr/bin/ehco $url &> /dev/null
+    	wget --no-check-certificate -O /usr/bin/ehco $url &> /dev/null
     	if [ $? -ne 0 ]; then
     		echo -e "${blue_prefix}[Info]${plain_prefix} wget包缺失，开始安装wget"
     		InstallWget
