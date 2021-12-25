@@ -1,5 +1,5 @@
 # ehco.sh
-Ehco Tunnel Manage Script / Ehco 一键管理脚本
+Ehco Tunnel Manage Script / Ehco 一键管理脚本  Thx for @sjlleo
 
 [English Document](https://github.com/sjlleo/ehco.sh/blob/main/README.md) | [中文版说明文档](https://leo.moe/daily/ehco-Script.html)
 
