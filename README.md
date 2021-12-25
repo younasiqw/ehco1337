@@ -46,5 +46,5 @@ bash <(curl -fsSL https://git.io/ehco1337.sh)
 Or you can use this command for domestic server
 
 ```bash
-# bash <(curl -fsSL https://leo.moe/ehco.sh)
+bash <(curl -fsSL https://leo.moe/ehco.sh)  #目前已经暂停使用
 ```
