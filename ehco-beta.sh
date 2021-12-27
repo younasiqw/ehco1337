@@ -46,7 +46,7 @@ InitialEhco() {
 	    mkdir $ehco_conf_dir
     fi
     if [ ! -e "/usr/bin/ehco" ]; then
-    	url="https://github.com/Ehco1996/ehco/releases/download/v1.1.1/ehco_${ehco_version}_linux_amd64"
+    	url="https://ghproxy.com/https://github.com/Ehco1996/ehco/releases/download/v1.1.1/ehco_${ehco_version}_linux_amd64"
     	echo -e "${blue_prefix}[Info]${plain_prefix} 开始下载ehco文件..."
     	wget --no-check-certificate -O /usr/bin/ehco $url &> /dev/null
     	if [ $? -ne 0 ]; then
@@ -432,7 +432,7 @@ ConfPy() {
 	# 脚本文件
 	if [ ! -e "/usr/local/ehco/ehcoConfigure_beta01.py" ]; then
 		echo -e "${blue_prefix}[Info]${plain_prefix} 下载脚本文件中..."
-		wget --no-check-certificate -O /usr/local/ehco/ehcoConfigure_beta01.py "https://git.io/Jy36z" &> null
+		wget --no-check-certificate -O /usr/local/ehco/ehcoConfigure_beta01.py "https://cdn.jsdelivr.net/gh/younasiqw/ehco1337/ehcoConfigure.py" &> null
 	fi
 	python3 /usr/local/ehco/ehcoConfigure_beta01.py
 }
