@@ -48,3 +48,7 @@ Or you can use this command for domestic server
 ```bash
 bash <(curl -fsSL https://cdn.jsdelivr.net/gh/younasiqw/ehco1337/ehco-cn.sh)
 ```
+This is the beta version
+```bash
+bash <(curl -fsSL https://git.io/ehco-beta)
+```
