@@ -52,3 +52,7 @@ This is the beta version
 ```bash
 bash <(curl -fsSL https://git.io/ehco-beta)
 ```
+
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/younasiqw/ehco1337/main/ehco-arm.sh)
+```
