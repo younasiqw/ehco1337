@@ -39,8 +39,12 @@ The `ehco` is contributed by [Ehco1996](https://github.com/Ehco1996), see the pr
 
 ## Usage
 
-```bash
+```
 bash <(curl -fsSL https://git.io/ehco1337.sh)
+```
+
+```
+https://acg.kr/ehco1337
 ```
 
 Or you can use this command for domestic server
