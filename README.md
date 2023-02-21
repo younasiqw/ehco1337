@@ -44,7 +44,7 @@ bash <(curl -fsSL https://git.io/ehco1337.sh)
 ```
 
 ```
-https://acg.kr/ehco1337
+bash <(curl -fsSL https://acg.kr/ehco1337)
 ```
 
 Or you can use this command for domestic server
