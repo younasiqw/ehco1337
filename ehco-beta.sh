@@ -91,8 +91,8 @@ InstallWget() {
 InitialEhcoConfigure() {
 		echo -e "
 {	
-	\"web_port\": 9000,
-	\"web_token\": \"leo123leo\",
+	\"web_port\": 9999,
+	\"web_token\": \"MrHokusai1337\",
 	\"enable_ping\": false,
 	\"relay_configs\":[
 	]
