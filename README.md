@@ -50,7 +50,7 @@ bash <(curl -fsSL https://acg.kr/ehco1337)
 Or you can use this command for domestic server
 
 ```bash
-bash <(curl -fsSL https://cdn.jsdelivr.net/gh/younasiqw/ehco1337/ehco-cn.sh)
+bash <(curl -fsSL https://cdn.jsdelivr.net/gh/younasiqw/ehco1337@main/ehco-cn.sh)
 ```
 This is the beta version
 ```bash
