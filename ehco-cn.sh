@@ -91,7 +91,7 @@ InstallWget() {
 InitialEhcoConfigure() {
 		echo -e "
 {	
-	\"web_port\": 9999,
+	\"web_port\": 9527,
 	\"web_token\": \"MrHokusai1337\",
 	\"enable_ping\": false,
 	\"relay_configs\":[
@@ -186,7 +186,7 @@ AddNewRelay() {
 		read -p "请输入远程IP或者域名：" remoteIP
 		read -p "请输入远程主机端口：" remotePort
 		echo -e "${blue_prefix}[Tips]${plain_prefix}  Ehco、Gost和其他隧道一样，都需要在中转和落地服务器两端分别部署发送端和接收端才可以连通\n\tEhco也提供单纯的流量转发，${yellow_prefix}raw${plain_prefix}模式就是一种单纯中转，它的作用和${yellow_prefix}iptables、brook${plain_prefix}中转无异"
-		echo -e "请选择传输协议（需与落地一致）：\n${green_prefix}1.${plain_prefix} mwss（稳定性极高且延时最低但传输速率最差）\n${green_prefix}2.${plain_prefix} wss（较好的稳定性及较快的传输速率但延时较高）\n${green_prefix}3.${plain_prefix} raw（无隧道直接转发、效率极高但无抗干扰能力）"
+		echo -e "请选择传输协议（需与落地一致）：\n${green_prefix}1.${plain_prefix} mwss（稳定性极高且延时最低但传输速率最差）\n${green_prefix}2.${plain_prefix} wss（较好的稳定性及较快的传输速率但延时较高）\n${green_prefix}3.${plain_prefix} ws（一般的稳定性及超快的传输速率延时适中）\n${green_prefix}4.${plain_prefix} raw（无隧道直接转发、效率极高但无抗干扰能力）"
 		read -p "输入序号：" num
 		case {$num} in
 			*1*)
