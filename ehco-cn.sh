@@ -197,7 +197,11 @@ AddNewRelay() {
 				transport_type=wss
 				conf="\n\t{\n\t\t\"listen\": \"0.0.0.0:$listenPort\",\n\t\t\"listen_type\": \"raw\",\n\t\t\"transport_type\": \"$transport_type\",\n\t\t\"tcp_remotes\": [\"wss:\/\/$remoteIP:$remotePort\"],\n\t\t\"udp_remotes\": [\"$remoteIP:$remotePort\"]\n\t}$endl"
 				;;
-			*3*)
+    			*3*)
+				transport_type=ws
+				conf="\n\t{\n\t\t\"listen\": \"0.0.0.0:$listenPort\",\n\t\t\"listen_type\": \"raw\",\n\t\t\"transport_type\": \"$transport_type\",\n\t\t\"tcp_remotes\": [\"wss:\/\/$remoteIP:$remotePort\"],\n\t\t\"udp_remotes\": [\"$remoteIP:$remotePort\"]\n\t}$endl"
+				;;
+			*4*)
 				transport_type=raw
 				conf="\n\t{\n\t\t\"listen\": \"0.0.0.0:$listenPort\",\n\t\t\"listen_type\": \"raw\",\n\t\t\"transport_type\": \"$transport_type\",\n\t\t\"tcp_remotes\": [\"$remoteIP:$remotePort\"],\n\t\t\"udp_remotes\": [\"$remoteIP:$remotePort\"]\n\t}$endl"
 				;;
@@ -240,7 +244,10 @@ AddNewRelay() {
 			*2*)
 				transport_type=wss
 				;;
-			*3*)
+    			*3*)
+				transport_type=ws
+				;;
+			*4*)
 				transport_type=raw
 				;;
 		esac
@@ -272,7 +279,10 @@ AddNewRelay() {
 			*2*)
 				listen_type=wss
 				;;
-			*3*)
+    			*3*)
+				listen_type=ws
+				;;
+			*4*)
 				listen_type=raw
 				;;
 		esac
@@ -286,7 +296,10 @@ AddNewRelay() {
 			*2*)
 				transport_type=wss
 				;;
-			*3*)
+    			*3*)
+				transport_type=ws
+				;;
+			*4*)
 				transport_type=raw
 				;;
 		esac
