@@ -213,7 +213,7 @@ class TerminalPanel():
             % (colorConst.blue_prefix,colorConst.plain_prefix,colorConst.yellow_prefix,colorConst.plain_prefix,colorConst.yellow_prefix,colorConst.plain_prefix,colorConst.yellow_prefix,colorConst.plain_prefix))
                 print("请选择传输协议（需与落地一致）")
             
-            print("%s1.%s mwss（稳定性极高且延时最低但传输速率最差）\n%s2.%s wss（较好的稳定性及较快的传输速率但延时较高）\n%s3.%s raw（无隧道直接转发、效率极高但无抗干扰能力）"
+            print("%s1.%s mwss（稳定性极高且延时最低但传输速率最差）\n%s2.%s wss（较好的稳定性及较快的传输速率但延时较高）\n%s3.%s ws（一般的稳定性及超快的传输速率延时适中）\n%s4.%s raw（无隧道直接转发、效率极高但无抗干扰能力）"
                 %(colorConst.green_prefix,colorConst.plain_prefix,colorConst.green_prefix,colorConst.plain_prefix,colorConst.green_prefix,colorConst.plain_prefix))
 
             method = input("请输入序号或者协议名称：")
@@ -222,6 +222,8 @@ class TerminalPanel():
                 method = 'mwss'
             elif method == '2' or method == 'wss':
                 method = 'wss'
+            elif method == '3' or method == 'ws':
+                method = 'ws'
             else:
                 method = 'raw'
 
@@ -415,7 +417,7 @@ class TerminalPanel():
             # 中转模式
             remoteIP = input("请输入远程IP地址：")
             remotePort = input("请输入远程远程主机端口：")
-            print("请选择传输协议（需与落地一致）：\n1.mwss（稳定性极高且延时最低但传输速率最差）\n2.wss（较好的稳定性及较快的传输速率但延时较高）\n3.raw（无隧道直接转发、效率极高但无抗干扰能力）")
+            print("请选择传输协议（需与落地一致）：\n1.mwss（稳定性极高且延时最低但传输速率最差）\n2.wss（较好的稳定性及较快的传输速率但延时较高）\n3.ws（一般的稳定性及超快的传输速率延时适中）\n4.raw（无隧道直接转发、效率极高但无抗干扰能力）")
             num = eval(input("输入序号："))
             if num == 1:
                 json_data['relay_configs'][count]['transport_type'] = 'mwss'
@@ -424,6 +426,9 @@ class TerminalPanel():
                 json_data['relay_configs'][count]['transport_type'] = 'wss'
                 json_data['relay_configs'][count]['tcp_remotes'][0] = "wss://" + remoteIP + ":" + remotePort
             elif num == 3:
+                json_data['relay_configs'][count]['transport_type'] = 'ws'
+                json_data['relay_configs'][count]['tcp_remotes'][0] = remoteIP + ":" + remotePort
+            elif num == 4:
                 json_data['relay_configs'][count]['transport_type'] = 'raw'
                 json_data['relay_configs'][count]['tcp_remotes'][0] = remoteIP + ":" + remotePort
             json_data['relay_configs'][count]['udp_remotes'][0] = remoteIP + ":" + remotePort
@@ -437,6 +442,8 @@ class TerminalPanel():
             elif num == 2:
                 json_data['relay_configs'][count]['listen_type'] = 'wss'
             elif num == 3:
+                json_data['relay_configs'][count]['listen_type'] = 'ws'
+            elif num == 4:
                 json_data['relay_configs'][count]['listen_type'] = 'raw'
             json_data['relay_configs'][count]['tcp_remotes'][0] = "0.0.0.0:" + remotePort
             json_data['relay_configs'][count]['udp_remotes'][0] = "0.0.0.0:" + remotePort
@@ -444,7 +451,7 @@ class TerminalPanel():
 
     def saveConf(self,json_data, flag=False):
         if flag:
-            jsonContext = "{\n\"web_port\": 9000,\n\"web_token\": \"leo123leo\",\n\"enable_ping\": false,\n\"relay_configs\":[\n]\n}"
+            jsonContext = "{\n\"web_port\": 9527,\n\"web_token\": \"MrHokusai1337\",\n\"enable_ping\": false,\n\"relay_configs\":[\n]\n}"
         else:
             jsonContext = json.dumps(json_data,sort_keys=True, indent=4, separators=(',', ':'))
         f2 = open(self.config_path, 'w')
