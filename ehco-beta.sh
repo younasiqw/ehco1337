@@ -17,7 +17,7 @@ export PATH
 
 [[ $EUID -ne 0 ]] && echo -e "[Error]请以root用户或者sudo提权运行本脚本！" && exit 1
 
-ehco_version="1.1.1"
+ehco_version="1.1.3"
 ehco_conf_dir="/usr/local/ehco/"
 CPUFrame=$(arch)
 SysID=$(cat /etc/os-release | grep ^ID=)
@@ -46,7 +46,7 @@ InitialEhco() {
 	    mkdir $ehco_conf_dir
     fi
     if [ ! -e "/usr/bin/ehco" ]; then
-    	url="https://github.com/Ehco1996/ehco/releases/download/v1.1.1/ehco_${ehco_version}_linux_amd64"
+    	url="https://cdn.jsdelivr.net/gh/Ehco1996/ehco@releases/download/v1.1.3/ehco_${ehco_version}_linux_amd64"
     	echo -e "${blue_prefix}[Info]${plain_prefix} 开始下载ehco文件..."
     	wget --no-check-certificate -O /usr/bin/ehco $url &> /dev/null
     	if [ $? -ne 0 ]; then
