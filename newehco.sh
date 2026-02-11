@@ -59,24 +59,36 @@ install_ehco() {
     
     echo -e "${GREEN}检测到系统架构: ${ARCH_STR}${PLAIN}"
     
-    # 检查本地是否有安装包
+    # --- 核心修改：自动识别带后缀的文件名 ---
     LOCAL_FILE=""
-    if [[ -f "./ehco" ]]; then
-        echo -e "${YELLOW}检测到当前目录下存在 ehco 文件。${PLAIN}"
+    POSSIBLE_FILES=("./ehco" "./ehco_linux_${ARCH_STR}")
+    
+    for f in "${POSSIBLE_FILES[@]}"; do
+        if [[ -f "$f" ]]; then
+            LOCAL_FILE="$f"
+            break
+        fi
+    done
+
+    if [[ -n "$LOCAL_FILE" ]]; then
+        echo -e "${YELLOW}检测到本地安装包: ${LOCAL_FILE}${PLAIN}"
         read -p "是否使用本地文件进行安装? [y/n]: " use_local
         if [[ "$use_local" == "y" ]]; then
-            LOCAL_FILE="./ehco"
+            echo -e "${GREEN}正在安装本地文件...${PLAIN}"
+            cp "$LOCAL_FILE" "$EHCO_BIN"
+        else
+            # 用户选择不使用本地文件，清除变量以便后续下载
+            LOCAL_FILE=""
         fi
     fi
 
-    if [[ -n "$LOCAL_FILE" ]]; then
-        cp "$LOCAL_FILE" "$EHCO_BIN"
-    else
+    # 如果没有本地文件或用户选择不使用，则下载
+    if [[ -z "$LOCAL_FILE" ]]; then
         echo -e "${YELLOW}正在从 GitHub 下载 Ehco v1.1.4 ($ARCH_STR)...${PLAIN}"
         DOWNLOAD_URL="https://github.com/Ehco1996/ehco/releases/download/v1.1.4/ehco_linux_${ARCH_STR}"
         wget -O "$EHCO_BIN" "$DOWNLOAD_URL"
         if [[ $? -ne 0 ]]; then
-            echo -e "${RED}下载失败，请检查网络或手动上传 ehco 文件到当前目录重新运行。${PLAIN}"
+            echo -e "${RED}下载失败，请检查网络或确保本地存在 ehco_linux_${ARCH_STR} 文件。${PLAIN}"
             exit 1
         fi
     fi
@@ -111,7 +123,6 @@ EOF
     systemctl start ehco
     
     echo -e "${GREEN}Ehco 安装完成并已设置为开机自启！${PLAIN}"
-    echo -e "提示: 如果您是手动上传的文件，请确保该文件与系统架构匹配。${PLAIN}"
     read -p "按回车键继续..."
 }
 
