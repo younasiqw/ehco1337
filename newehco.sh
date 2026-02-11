@@ -18,9 +18,6 @@ EHCO_CONF_DIR="/etc/ehco"
 EHCO_CONF_FILE="${EHCO_CONF_DIR}/config.json"
 SYSTEMD_FILE="/etc/systemd/system/ehco.service"
 
-# --- 端口黑名单 ---
-BLOCKED_PORTS=(80 443 8080 8443 8000 1080)
-
 # --- 检查 Root 权限 ---
 [[ $EUID -ne 0 ]] && echo -e "${RED}错误: 必须使用 root 用户运行此脚本！${PLAIN}" && exit 1
 
@@ -46,18 +43,11 @@ check_sys() {
 
 check_port_valid() {
     local port=$1
-    # 检查范围
+    # 仅检查范围
     if [[ $port -lt 1 || $port -gt 65535 ]]; then
         echo -e "${RED}端口必须在 1-65535 之间${PLAIN}"
         return 1
     fi
-    # 检查黑名单
-    for blocked in "${BLOCKED_PORTS[@]}"; do
-        if [[ $port -eq $blocked ]]; then
-            echo -e "${RED}警告: 端口 $port 在您的封禁列表中 (80,443,8080,8443,8000,1080)${PLAIN}"
-            return 1
-        fi
-    done
     return 0
 }
 
@@ -121,7 +111,8 @@ EOF
     systemctl start ehco
     
     echo -e "${GREEN}Ehco 安装完成并已设置为开机自启！${PLAIN}"
-    pause
+    echo -e "提示: 如果您是手动上传的文件，请确保该文件与系统架构匹配。${PLAIN}"
+    read -p "按回车键继续..."
 }
 
 uninstall_ehco() {
@@ -134,13 +125,13 @@ uninstall_ehco() {
     # 保留配置文件以便重装，如需删除可解开下行注释
     # rm -rf "$EHCO_CONF_DIR"
     echo -e "${GREEN}卸载完成！${PLAIN}"
-    pause
+    read -p "按回车键继续..."
 }
 
 restart_ehco() {
     systemctl restart ehco
     echo -e "${GREEN}Ehco 服务已重启${PLAIN}"
-    pause
+    read -p "按回车键继续..."
 }
 
 init_config() {
@@ -288,7 +279,7 @@ menu_tunnel() {
             2) 
                 echo -e "${YELLOW}当前配置文件内容 ($EHCO_CONF_FILE):${PLAIN}"
                 jq . "$EHCO_CONF_FILE"
-                pause
+                read -p "按回车键继续..."
                 ;;
             3) init_config ;;
             0) break ;;
@@ -318,7 +309,7 @@ show_menu() {
         4) 
             if [[ ! -f "$EHCO_BIN" ]]; then
                 echo -e "${RED}请先安装 Ehco!${PLAIN}"
-                pause
+                read -p "按回车键继续..."
             else
                 menu_tunnel
             fi
@@ -326,10 +317,6 @@ show_menu() {
         0) exit 0 ;;
         *) echo -e "${RED}请输入正确的数字 [0-4]${PLAIN}" ;;
     esac
-}
-
-pause() {
-    read -p "按回车键继续..."
 }
 
 # --- 脚本入口 ---
